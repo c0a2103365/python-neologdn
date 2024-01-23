@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  mecab:
+    container_name: "mecab-python-neologd"
+    image: "mecab-python-neologd"
+    build: .
+    volumes:
+      - "../workspace:/workspace"
+    tty: true
+
+    #GPUを使う場合の設定
+    environment:
+      - "NVIDIA_VISIBLE_DEVICES=all"
+      - "NVIDIA_DRIVER_CAPABILITIES=all"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities:
+              - gpu
